@@ -1,7 +1,7 @@
 / {
 	chosen {
-		zephyr,console = &uart0;
-		zephyr,shell-uart = &uart0;
+		zephyr,console = &cdc_acm_uart0;
+		zephyr,shell-uart = &cdc_acm_uart0;
 	};
 };
 
@@ -23,7 +23,13 @@
 zephyr_udc0: &usb_otg {
 	status = "okay";
 
+    cdc_acm_uart0: cdc_acm_uart0 {
+        compatible = "zephyr,cdc-acm-uart";
+        label = "CDC_ACM_0";
+    };
+
     cdc_ncm_eth0: cdc_ncm_eth0 {
+        label = "CDC_ECM_0";
 		compatible = "zephyr,cdc-ncm-ethernet";
 		remote-mac-address = "00005E005301";
 	};
