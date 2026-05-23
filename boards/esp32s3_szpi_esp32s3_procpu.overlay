@@ -1,0 +1,31 @@
+/ {
+	chosen {
+		zephyr,console = &uart0;
+		zephyr,shell-uart = &uart0;
+	};
+};
+
+&usb_serial {
+	status = "disabled";
+};
+
+&uart0 {
+	status = "okay";
+	current-speed = <115200>;
+	pinctrl-0 = <&uart0_default>;
+	pinctrl-names = "default";
+};
+
+&flash0 {
+    reg = <0x0 DT_SIZE_M(16)>;
+};
+
+zephyr_udc0: &usb_otg {
+	status = "okay";
+
+    cdc_ncm_eth0: cdc_ncm_eth0 {
+		compatible = "zephyr,cdc-ncm-ethernet";
+		remote-mac-address = "00005E005301";
+	};
+
+};
